@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- stylesheets -->
+    <link href="../Scripts/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Scripts/mocha.css" rel="stylesheet" />
+    <!-- library scripts -->
+    <script src="../Scripts/mocha.js"></script>
+    <script src="../Scripts/chai.min.js"></script>
+    <script src="../Scripts/sinon-1.12.2.js"></script>
+    <script src="../Scripts/angular.js"></script>
+    <script>
+        mocha.setup({
+            "ui": "bdd",
+            "reporter": "html"
+        });
+    </script>
+    <script src="../Scripts/angular-mocks.js"></script>
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+    <!-- project scripts -->
+    <script src="../app/app.js"></script>
+    <script src="../app/movies/movieService.js"></script>
+    <script src="movies/movieService-Test.js"></script>
+
+</head>
+<body>
+    <div class="container" style="margin-top:30px;">
+        <h1>Unit Test</h1>
+        <div id="mocha"></div>
+    </div>
+    <script>
+        mocha.run();
+    </script>
+</body>
+</html>

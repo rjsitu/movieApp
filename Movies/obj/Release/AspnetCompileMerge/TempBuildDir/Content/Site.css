@@ -1,0 +1,90 @@
+﻿body {
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.nav_style {
+    position: relative;
+    background-color: #021f2a;
+    top: 0;
+    width: 100%;
+    color: #ffffff;
+}
+
+.padding20 {
+    padding: 20px !important;
+}
+
+.nopadding {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.notop_bottom_padding {
+    padding-top: 10px !important;
+    padding-bottom: 0px !important;
+}
+
+.margintop30 {
+    margin-top: 30px;
+}
+
+.multiSelectWidth {
+    width: 30% !important;
+}
+
+.full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+}
+
+.partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+}
+
+#lodingDiv {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: grey;
+    opacity: .8;
+}
+
+.ajax-loader {
+    position: absolute;
+    left: 50%;
+    width: 100px;
+    top: 50%;
+    margin-left: -32px;
+    margin-top: -32px;
+    display: block;
+    background-image: url(../images/gear.gif);
+    background-repeat: no-repeat;
+    background-position: -10px;
+    height: 100px;
+}

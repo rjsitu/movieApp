@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MoviesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblDepartment">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Department" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblFilmCrew">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Sex" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="DOB" Type="datetime" Nullable="false" />
+    <Property Name="Bio" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DepartmentType" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblMovieActors">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MovieID" Type="int" Nullable="false" />
+    <Property Name="ActorID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblMovies">
+    <Key>
+      <PropertyRef Name="MovieID" />
+    </Key>
+    <Property Name="MovieID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="YearOfRelease" Type="smallint" Nullable="false" />
+    <Property Name="Plot" Type="varchar(max)" Nullable="false" />
+    <Property Name="PosterContentType" Type="varchar" MaxLength="50" />
+    <Property Name="Poster" Type="image" />
+    <Property Name="ProducerID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tblFilmCrew_tblDepartment">
+    <End Role="tblDepartment" Type="Self.tblDepartment" Multiplicity="1" />
+    <End Role="tblFilmCrew" Type="Self.tblFilmCrew" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDepartment">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="tblFilmCrew">
+        <PropertyRef Name="DepartmentType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblMovieActors_tblFilmCrew">
+    <End Role="tblFilmCrew" Type="Self.tblFilmCrew" Multiplicity="1" />
+    <End Role="tblMovieActors" Type="Self.tblMovieActors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblFilmCrew">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblMovieActors">
+        <PropertyRef Name="ActorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblMovieActors_tblMovies">
+    <End Role="tblMovies" Type="Self.tblMovies" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblMovieActors" Type="Self.tblMovieActors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblMovies">
+        <PropertyRef Name="MovieID" />
+      </Principal>
+      <Dependent Role="tblMovieActors">
+        <PropertyRef Name="MovieID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblMovies_tblFilmCrew">
+    <End Role="tblFilmCrew" Type="Self.tblFilmCrew" Multiplicity="1" />
+    <End Role="tblMovies" Type="Self.tblMovies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblFilmCrew">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblMovies">
+        <PropertyRef Name="ProducerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MoviesDBModelStoreContainer">
+    <EntitySet Name="tblDepartment" EntityType="Self.tblDepartment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblFilmCrew" EntityType="Self.tblFilmCrew" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMovieActors" EntityType="Self.tblMovieActors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMovies" EntityType="Self.tblMovies" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblFilmCrew_tblDepartment" Association="Self.FK_tblFilmCrew_tblDepartment">
+      <End Role="tblDepartment" EntitySet="tblDepartment" />
+      <End Role="tblFilmCrew" EntitySet="tblFilmCrew" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblMovieActors_tblFilmCrew" Association="Self.FK_tblMovieActors_tblFilmCrew">
+      <End Role="tblFilmCrew" EntitySet="tblFilmCrew" />
+      <End Role="tblMovieActors" EntitySet="tblMovieActors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblMovieActors_tblMovies" Association="Self.FK_tblMovieActors_tblMovies">
+      <End Role="tblMovies" EntitySet="tblMovies" />
+      <End Role="tblMovieActors" EntitySet="tblMovieActors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblMovies_tblFilmCrew" Association="Self.FK_tblMovies_tblFilmCrew">
+      <End Role="tblFilmCrew" EntitySet="tblFilmCrew" />
+      <End Role="tblMovies" EntitySet="tblMovies" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,10 @@
+D:\Ducks\Movies\MoviesDataAccessLayes\bin\Release\MoviesDataAccessLayes.dll.config
+D:\Ducks\Movies\MoviesDataAccessLayes\bin\Release\MoviesDataAccessLayes.dll
+D:\Ducks\Movies\MoviesDataAccessLayes\bin\Release\MoviesDataAccessLayes.pdb
+D:\Ducks\Movies\MoviesDataAccessLayes\bin\Release\EntityFramework.dll
+D:\Ducks\Movies\MoviesDataAccessLayes\bin\Release\EntityFramework.SqlServer.dll
+D:\Ducks\Movies\MoviesDataAccessLayes\bin\Release\EntityFramework.xml
+D:\Ducks\Movies\MoviesDataAccessLayes\bin\Release\EntityFramework.SqlServer.xml
+D:\Ducks\Movies\MoviesDataAccessLayes\obj\Release\MoviesDataAccessLayer.csprojResolveAssemblyReference.cache
+D:\Ducks\Movies\MoviesDataAccessLayes\obj\Release\MoviesDataAccessLayes.dll
+D:\Ducks\Movies\MoviesDataAccessLayes\obj\Release\MoviesDataAccessLayes.pdb

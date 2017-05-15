@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MoviesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="MoviesDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblDepartments" EntityType="MoviesDBModel.tblDepartment" />
+    <EntitySet Name="tblFilmCrews" EntityType="MoviesDBModel.tblFilmCrew" />
+    <EntitySet Name="tblMovieActors" EntityType="MoviesDBModel.tblMovieActor" />
+    <EntitySet Name="tblMovies" EntityType="MoviesDBModel.tblMovy" />
+    <AssociationSet Name="FK_tblFilmCrew_tblDepartment" Association="MoviesDBModel.FK_tblFilmCrew_tblDepartment">
+      <End Role="tblDepartment" EntitySet="tblDepartments" />
+      <End Role="tblFilmCrew" EntitySet="tblFilmCrews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblMovieActors_tblFilmCrew" Association="MoviesDBModel.FK_tblMovieActors_tblFilmCrew">
+      <End Role="tblFilmCrew" EntitySet="tblFilmCrews" />
+      <End Role="tblMovieActor" EntitySet="tblMovieActors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblMovies_tblFilmCrew" Association="MoviesDBModel.FK_tblMovies_tblFilmCrew">
+      <End Role="tblFilmCrew" EntitySet="tblFilmCrews" />
+      <End Role="tblMovy" EntitySet="tblMovies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblMovieActors_tblMovies" Association="MoviesDBModel.FK_tblMovieActors_tblMovies">
+      <End Role="tblMovy" EntitySet="tblMovies" />
+      <End Role="tblMovieActor" EntitySet="tblMovieActors" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tblDepartment">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Department" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblFilmCrews" Relationship="MoviesDBModel.FK_tblFilmCrew_tblDepartment" FromRole="tblDepartment" ToRole="tblFilmCrew" />
+  </EntityType>
+  <EntityType Name="tblFilmCrew">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sex" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Bio" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DepartmentType" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblDepartment" Relationship="MoviesDBModel.FK_tblFilmCrew_tblDepartment" FromRole="tblFilmCrew" ToRole="tblDepartment" />
+    <NavigationProperty Name="tblMovieActors" Relationship="MoviesDBModel.FK_tblMovieActors_tblFilmCrew" FromRole="tblFilmCrew" ToRole="tblMovieActor" />
+    <NavigationProperty Name="tblMovies" Relationship="MoviesDBModel.FK_tblMovies_tblFilmCrew" FromRole="tblFilmCrew" ToRole="tblMovy" />
+  </EntityType>
+  <EntityType Name="tblMovieActor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MovieID" Type="Int32" Nullable="false" />
+    <Property Name="ActorID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblFilmCrew" Relationship="MoviesDBModel.FK_tblMovieActors_tblFilmCrew" FromRole="tblMovieActor" ToRole="tblFilmCrew" />
+    <NavigationProperty Name="tblMovy" Relationship="MoviesDBModel.FK_tblMovieActors_tblMovies" FromRole="tblMovieActor" ToRole="tblMovy" />
+  </EntityType>
+  <EntityType Name="tblMovy">
+    <Key>
+      <PropertyRef Name="MovieID" />
+    </Key>
+    <Property Name="MovieID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="YearOfRelease" Type="Int16" Nullable="false" />
+    <Property Name="Plot" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PosterContentType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Poster" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProducerID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblFilmCrew" Relationship="MoviesDBModel.FK_tblMovies_tblFilmCrew" FromRole="tblMovy" ToRole="tblFilmCrew" />
+    <NavigationProperty Name="tblMovieActors" Relationship="MoviesDBModel.FK_tblMovieActors_tblMovies" FromRole="tblMovy" ToRole="tblMovieActor" />
+  </EntityType>
+  <Association Name="FK_tblFilmCrew_tblDepartment">
+    <End Type="MoviesDBModel.tblDepartment" Role="tblDepartment" Multiplicity="1" />
+    <End Type="MoviesDBModel.tblFilmCrew" Role="tblFilmCrew" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDepartment">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="tblFilmCrew">
+        <PropertyRef Name="DepartmentType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblMovieActors_tblFilmCrew">
+    <End Type="MoviesDBModel.tblFilmCrew" Role="tblFilmCrew" Multiplicity="1" />
+    <End Type="MoviesDBModel.tblMovieActor" Role="tblMovieActor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblFilmCrew">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblMovieActor">
+        <PropertyRef Name="ActorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblMovies_tblFilmCrew">
+    <End Type="MoviesDBModel.tblFilmCrew" Role="tblFilmCrew" Multiplicity="1" />
+    <End Type="MoviesDBModel.tblMovy" Role="tblMovy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblFilmCrew">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblMovy">
+        <PropertyRef Name="ProducerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblMovieActors_tblMovies">
+    <End Type="MoviesDBModel.tblMovy" Role="tblMovy" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="MoviesDBModel.tblMovieActor" Role="tblMovieActor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblMovy">
+        <PropertyRef Name="MovieID" />
+      </Principal>
+      <Dependent Role="tblMovieActor">
+        <PropertyRef Name="MovieID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

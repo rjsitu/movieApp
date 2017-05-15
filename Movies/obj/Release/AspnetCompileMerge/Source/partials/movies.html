@@ -1,0 +1,33 @@
+<a ui-sref="newMovie" class="btn-primary btn-lg nodecoration">Add New Movie</a>
+
+<div class="table-responsive com-table">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th width="15%">Name</th>
+                <th width="10%">Year Of Release</th>
+                <th width="15%">Plot</th>
+                <th width="20%">Poster</th>
+                <th width="10%">Producer</th>
+                <th width="20%">Actors</th>
+                <th># Action #</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="movie in Movies">
+                <td width="15%"> {{movie.Name}}</td>
+                <td width="10%">{{movie.YearOfRelease}}</td>
+                <td width="15%">{{movie.Plot}}</td>
+                <td width="20%">{{movie.Poster}}</td>
+                <td width="10%">{{movie.ProducerName}}</td>
+                <td width="20%">
+                    <span ng-repeat="actor in movie.ActorsName">{{actor}}</span>
+                </td>
+                <td>
+                    <a class="btn btn-primary" ui-sref="editMovie({id:movie.MovieID})">Edit</a>
+                    <a class="btn btn-danger" ng-click="deleteMovie(movie)">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
